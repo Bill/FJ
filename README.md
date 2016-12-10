@@ -27,9 +27,15 @@ If the first goal is met, then FJ might serve as a tool for understanding `java.
 | implementation        | 74            |
 | test (happy path only)| 74            |
 
-The preference for a functional approach over an object-oriented one has given rise to a number of interesting outcomes in FJ so far:
+The preference for a functional approach over an object-oriented one has given rise to some interesting outcomes in FJ so far:
 
-|                       | Java 8                          | FJ                                        |
+* concision: fewer concepts ("verbs") for users to learn
+* centralization of implementation (of functions) in the library itself
+* functional invocation syntax
+
+Compare the concepts or "verbs" that the user needs to understand:
+
+| concept               | Java 8                          | FJ                                        |
 | ----------------------|---------------------------------|-------------------------------------------|
 | identity              | `identity` methods              | `identity`   "function" in `Core`         |
 | functional composition| `compose` and `andThen` methods | `compose`    "function" in `Core`         |
@@ -37,9 +43,9 @@ The preference for a functional approach over an object-oriented one has given r
 | partial application   | no                              | `partial`    "function" in `Core`         |
 | `constantly` function | no                              | `constantly` "functions" in `F0`,`F1`,`F2`|
 
-The various "functions" are actually static methods. This makes functional syntax possible with FJ via static import of the `Core` interface.
+The various "functions" are actually static methods. This makes functional invocation syntax possible with FJ via static import of the `Core` interface.
 
-A single (family of) static `compose` methods on `Core` can serve syntactically as a single `compose` "function". This aligns better, with what an experienced functional programmer would expect.
+Not only does this provide better alignment with what an experienced functional programmer would expect, it also leads to concision. For example, a single (family of) static `compose` methods on `Core` serves syntactically as a single `compose` "function". The user need learn only the single name versus two names in `java.util.function`: `compose` and `andThen`. Also the implementation of FJ `compose` is all in one file rather than spread out across dozens of interfaces. This centralization of implementation is also exemplified by the `identity` "function".
 
 FJ is less broad than `java.util.function` though:
 
