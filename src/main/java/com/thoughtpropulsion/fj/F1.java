@@ -1,0 +1,8 @@
+package com.thoughtpropulsion.fj;
+
+@FunctionalInterface
+public interface F1<A, B> {
+    A apply(B x);
+
+    static <A,B> F1<A,B> constantly(A x) { return (dont_care) -> x; }
+}
