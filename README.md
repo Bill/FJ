@@ -14,8 +14,8 @@ The `constantly` "function" is defined in each functional interface. Its variant
 The library operates on "functions", where a function can be any of:
 
 * any lambda:
-**  the result of any lambda expression or statement
-**  any method reference
+  * the result of any lambda expression or statement
+  * any method reference
 * any object implementing one of the functional interfaces defined in FJ: `F0`, `F1`, `F2`
 
 Because the library functions are themselves available as (static) method references, any function from the library itself, or returned by a function from the library, may be operated upon further.
