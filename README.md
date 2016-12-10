@@ -2,29 +2,43 @@
 
 Defines functional interfaces for 0-ary, 1-ary and 2-ary functions: `F0`, `F1`, `F2`.
 
-Operations on functions: are defined in the `Core` interface:
+Operations on functions: are defined as "functions" in the `Core` interface:
 
 * `identity`
 * `compose`
 * `memoize`
 * `partial`
 
-The `constantly` function is defined in each functional interface since its return type varies but its argument list is the same for each arity.
+The `constantly` "function" is defined in each functional interface. Its variants couldn't be defined in the `Core` interface since its return type varies but its argument list is the same for each arity.
 
 ## Motivation
 
 Java 8 introduced lambdas, functional interfaces, method references and a library of ready-made functional interfaces in `java.util.function`. That package can be hard to understand all in one go. And while it may represent the definitive intent of the language designers with respect to functional programming, variations on that approach may prove useful, educational, or at least interesting.
 
-FJ has two motivations:
+FJ is just such a variation. It has two motivations:
 
-1. be a minimal illustrative example of functional programming in Java
-2. prefer a functional approach over an object approach
+1. serve as a minimal illustrative example of functional programming in Java
+2. prefer a functional approach over an object-oriented approach
 
-If the first goal is met, then FJ might serve as a tool for understanding `java.util.function`.
+If the first goal is met, then FJ might serve as a tool for understanding `java.util.function`. FJ is small. A recent code count:
 
-The only real outcome (so far) of the second goal is that whereas `java.util.function` interfaces define composition via the `andThen` member function, FJ defines a family of generic `compose` static member functions on the `Core` interface.
+|                       | lines of code |
+| ----------------------|---------------|
+| implementation        | 74            |
+| test (happy path only)| 74            |
 
-So FJ is less broad:
+The preference for a functional approach over an object-oriented one has given rise to a number of interesting outcomes in FJ so far:
+
+|                       | Java 8                          | FJ                   |
+| ----------------------|---------------------------------|----------------------|
+| identity              | methods                         | `identity` "function"|
+| functional composition| `compose` and `andThen` methods | `compose` "function" |
+| memoization           | no                              | `memoize` "function" |
+| partial application   | no                              | `partial` "function" |
+
+The various "functions" are actually static methods defined on the `Core` interface. Most interesting is that a single (family of) `compose` methods on Core can serve syntactically as a single `compose` "function". This aligns better, with what an experienced functional programmer would expect.
+
+FJ is less broad than `java.util.function` though:
 
 |                      | Java 8 | FJ  |
 | ---------------------|--------|-----|
@@ -42,6 +56,13 @@ Also, whereas `java.util.function` parameterizes interfaces on the return value 
 | `Function<T,R>`    | `F1<R,T>`   |
 | `BiFunction<T,U,R>`| `F2<R,T,U>` |
 
+And actually, FJ uses `A`,`B`,`C` as the formal type parameters:
+
+| formal type parameter | semantic meaning     |
+|-----------------------|----------------------|
+| `A`                   | return type          |
+| `B`                   | first argument type  |
+| `C`                   | second argument type |
 
 ## Examples
 
