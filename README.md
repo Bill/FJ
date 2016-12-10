@@ -29,14 +29,17 @@ If the first goal is met, then FJ might serve as a tool for understanding `java.
 
 The preference for a functional approach over an object-oriented one has given rise to a number of interesting outcomes in FJ so far:
 
-|                       | Java 8                          | FJ                   |
-| ----------------------|---------------------------------|----------------------|
-| identity              | methods                         | `identity` "function"|
-| functional composition| `compose` and `andThen` methods | `compose` "function" |
-| memoization           | no                              | `memoize` "function" |
-| partial application   | no                              | `partial` "function" |
+|                       | Java 8                          | FJ                                        |
+| ----------------------|---------------------------------|-------------------------------------------|
+| identity              | `identity` methods              | `identity`   "function" in `Core`         |
+| functional composition| `compose` and `andThen` methods | `compose`    "function" in `Core`         |
+| memoization           | no                              | `memoize`    "function" in `Core`         |
+| partial application   | no                              | `partial`    "function" in `Core`         |
+| `constantly` function | no                              | `constantly` "functions" in `F0`,`F1`,`F2`|
 
-The various "functions" are actually static methods defined on the `Core` interface. Most interesting is that a single (family of) `compose` methods on Core can serve syntactically as a single `compose` "function". This aligns better, with what an experienced functional programmer would expect.
+The various "functions" are actually static methods. This makes functional syntax possible with FJ via static import of the `Core` interface.
+
+A single (family of) static `compose` methods on `Core` can serve syntactically as a single `compose` "function". This aligns better, with what an experienced functional programmer would expect.
 
 FJ is less broad than `java.util.function` though:
 
