@@ -36,9 +36,8 @@ public class ClosedTest {
          *      (argument mismatch; java.lang.Object cannot be converted to com.thoughtpropulsion.fj.F1<A,B>)
          * F1<Integer,Integer> h = compose(Core::memoize,Core::partial).apply((x,y)->{++counter; return x*y;}, 4);
          *
-         * But breaking it into two statements allows Java to understand it.
          * I don't know any Java syntax that'll let me tell the compiler the type of the intermediate expression
-         * short of just breaking it into two separate expressions:
+         * short of just breaking it into two separate expressions like this:
          */
         F2<F1<Integer,Integer>,F2<Integer,Integer,Integer>,Integer> g = compose(Core::memoize,Core::partial);
         F1<Integer,Integer> h = g.apply((x,y)->{++counter; return x*y;}, 4);
