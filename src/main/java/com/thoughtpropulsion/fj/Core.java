@@ -23,10 +23,10 @@ public interface Core {
 
     static <A,B>   F1<A,B> memoize(F1<A,B> f) {
         HashMap<B,A> memory = new HashMap<>();
-        return (B x) -> {
-            if(! memory.containsKey(x))
-                memory.put(x,f.apply(x));
-            return memory.get(x);
+        return (B key) -> {
+            if(! memory.containsKey(key))
+                memory.put(key,f.apply(key));
+            return memory.get(key);
         };
     }
     static <A,B,C>   F2<A,B,C> memoize(F2<A,B,C> f) {

@@ -48,21 +48,16 @@ public class CoreTest {
         assertThat(f.apply(2,3), is(7.0));
     }
 
-    @Test
-    public void composeIdentityConstantlyTest() {
-        // FIXME: shouldn't have to qualify identity fn here
-        F1<Integer, Integer> f = compose(Core::identity, F1.constantly(5));
-        assertThat( f.apply(3), is(5));
-    }
-
     int counter=0;
 
     @Test
     public void memoizeF1Test() {
         counter = 0;
-        F1<Integer,Integer> f = memoize((x)->{counter+=1; System.out.println("bump");return counter;});
-        assertThat(f.apply(3),is(1));
-        assertThat(f.apply(3),is(1));
+        F1<Integer,Integer> f = memoize((x)->{++counter; System.out.println("bump");return x;});
+        assertThat(f.apply(3),is(3));
+        assertThat(f.apply(3),is(3));
+        assertThat(f.apply(4),is(4));
+        assertThat(counter,is(2));
     }
 
     int counter2=0;
@@ -70,9 +65,11 @@ public class CoreTest {
     @Test
     public void memoizeF2Test() {
         counter2 = 0;
-        F2<Integer,Integer,Integer> f = memoize((x, t)->{counter2+=1; System.out.println("bump");return counter2;});
-        assertThat(f.apply(3, 4),is(1));
-        assertThat(f.apply(3, 4),is(1));
+        F2<Integer,Integer,Integer> f = memoize((x, y)->{++counter2; System.out.println("bump");return x*y;});
+        assertThat(f.apply(3, 4),is(12));
+        assertThat(f.apply(3, 4),is(12));
+        assertThat(f.apply(4, 4),is(16));
+        assertThat(counter2,is(2));
     }
 
     @Test
