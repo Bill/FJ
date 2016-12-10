@@ -11,6 +11,64 @@ Operations on functions: are defined as "functions" in the `Core` interface:
 
 The `constantly` "function" is defined in each functional interface. Its variants couldn't be defined in the `Core` interface since its return type varies but its argument list is the same for each arity.
 
+The library operates on "functions", where a function can be any of:
+
+* any lambda:
+**  the result of any lambda expression or statement
+**  any method reference
+* any object implementing one of the functional interfaces defined in FJ: `F0`, `F1`, `F2`
+
+Because the library functions are themselves available as (static) method references, any function from the library itself, or returned by a function from the library, may be operated upon further.
+
+This works because functions in the library are defined in terms of `F0`, `F1`, `F2` and the functions in the library are closed over those three interfaces plus lambdas.
+
+Unfortunately, due to the way Java 8 works, the library will not work with objects implementing other functional interfaces (not defined in the library). This issue is not unique to FJ--`java.util.function` has the same issue. See `LambdaTest` for details. This constitutes a barrier to interoperability between functional Java libraries.
+
+## Quickie Examples
+
+From `CoreTest`:
+
+Compose two functions:
+
+```java
+F1<Double, Integer> f = compose((x)->{return x + 1.0;}, (x)->{return x * 2;});
+assertThat(f.apply(3), is(7.0));
+```
+
+Partial application:
+
+```java
+F1<Integer,Integer> f = partial( (x, y)->{return x + y;}, 2);
+assertThat(f.apply(3), is(5));
+```
+
+Even more partial application:
+```java
+F0<Integer> f = partial( (x, y)->{return x + y;}, 3, 2);
+assertThat(f.apply(), is(5));
+```
+
+And the obiligatory (recursive) fibonacci function with memoization optimization from `FibTest.java`:
+
+```java
+public class FibTest {
+
+    static F1<Integer,Integer> m_fib = memoize(FibTest::fib);
+    static int fib(int n) {
+        switch(n) {
+            case 0: case 1: return n;
+            default:        return m_fib.apply(n-1) + m_fib.apply(n-2);
+        }
+    }
+
+    @Test
+    public void fibTest() {
+        // fib(50)
+        assertThat(m_fib.apply(46),is(1836311903));
+    }
+}
+```
+
 ## Motivation
 
 Java 8 introduced lambdas, functional interfaces, method references and a library of ready-made functional interfaces in `java.util.function`. That package can be hard to understand all in one go. And while it may represent the definitive intent of the language designers with respect to functional programming, variations on that approach may prove useful, educational, or at least interesting.
