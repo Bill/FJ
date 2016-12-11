@@ -15,8 +15,10 @@ public class ClosedTest {
 
     @Test
     public void composeIdentityConstantlyTest() {
-        // Kinda sad we have to qualify identity here but that's the Java syntax for a method ref
-        // we needn't qualify compose because it is not a method ref: we are invoking the method
+        /*
+         * Kinda sad we have to qualify identity here but that's the Java syntax for a method ref
+         * we needn't qualify compose because it is not a method ref: we are invoking the method
+         */
         F1<Integer, Integer> f = compose(Core::identity, F1.constantly(5));
         assertThat( f.apply(3), is(5));
     }

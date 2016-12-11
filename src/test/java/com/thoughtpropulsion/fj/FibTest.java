@@ -20,7 +20,6 @@ public class FibTest {
 
     @Test
     public void fibTest() {
-        // fib(50)
         assertThat(m_fib.apply(46),is(1836311903));
     }
 }

@@ -101,7 +101,7 @@ Compare the concepts or "verbs" that the user needs to understand:
 | partial application   | no                              | `partial`    "function" in `Core`         |
 | `constantly` function | no                              | `constantly` "functions" in `F0`,`F1`,`F2`|
 
-The various "functions" are actually static methods. This makes functional invocation syntax possible with FJ via static import of the `Core` interface.
+The various "functions" are actually static methods. All the public functionality of FP is implemented as static methods rather than instance methods. This makes functional invocation syntax possible with FJ via static import of the `Core` interface.
 
 Not only does this provide better alignment with what an experienced functional programmer would expect, it also leads to concision. For example, a single (family of) static `compose` methods on `Core` serves syntactically as a single `compose` "function". The user need learn only the single name versus two names in `java.util.function`: `compose` and `andThen`. Also the implementation of FJ `compose` is all in one file rather than spread out across dozens of interfaces. This centralization of implementation is also exemplified by the `identity` "function".
 

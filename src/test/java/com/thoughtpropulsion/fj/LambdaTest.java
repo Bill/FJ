@@ -28,8 +28,8 @@ public class LambdaTest {
          * What's surprising is callWith4() appears to invoke the "scooby"
          * method on each one in turn. Lambda's appear to respond to any
          * method invocation, regardless of name. That being the case
-         * it seem there should be an invocation syntax that elides the name
-         * like just f(4) instead of f.doiIt(4).
+         * it seems there should be an invocation syntax that elides the name
+         * like just f(4) instead of f.scooby(4).
          */
         assertThat(callWith4(FC1::Scooby), is(6));
         assertThat(callWith4((x) -> x + 3), is(7));
@@ -54,6 +54,7 @@ public class LambdaTest {
          * It means if you have a lib that is defined i.t.o. some functional e.g. FI1,
          * you can pass lambdas to it, but you can't pass otherwise-compatible
          * objects implementing some other functional interface FI2.
+         * Error:(58, 32) java: incompatible types: com.thoughtpropulsion.fj.LambdaTest.FC2 cannot be converted to com.thoughtpropulsion.fj.LambdaTest.FI1
          */
         //assertThat( callWith4( new FC2() ),   is(7));
     }

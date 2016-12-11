@@ -8,6 +8,9 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Test;
 
+/*
+ * Happy-paths test of Core
+ */
 public class CoreTest {
 
     @Test
@@ -53,7 +56,7 @@ public class CoreTest {
     @Test
     public void memoizeF1Test() {
         counter = 0;
-        F1<Integer,Integer> f = memoize((x)->{++counter; System.out.println("bump");return x;});
+        F1<Integer,Integer> f = memoize((x)->{++counter; return x;});
         assertThat(f.apply(3),is(3));
         assertThat(f.apply(3),is(3));
         assertThat(f.apply(4),is(4));
@@ -65,7 +68,7 @@ public class CoreTest {
     @Test
     public void memoizeF2Test() {
         counter2 = 0;
-        F2<Integer,Integer,Integer> f = memoize((x, y)->{++counter2; System.out.println("bump");return x*y;});
+        F2<Integer,Integer,Integer> f = memoize((x, y)->{++counter2; return x*y;});
         assertThat(f.apply(3, 4),is(12));
         assertThat(f.apply(3, 4),is(12));
         assertThat(f.apply(4, 4),is(16));
