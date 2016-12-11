@@ -113,7 +113,7 @@ FJ is less broad than `java.util.function` though:
 | fn arity 0,1,2       | yes    | yes |
 | fns on unboxed types | yes    | no  |
 
-Since FJ does not address boxed types, you won't find equivalents of the various `DoubleXXX`, `IntXXX`, or `LongXXX` functions in FJ. Nor will you find boolean-valued functional interfaces like `Predicate` or `XXXPredicate` in FJ. All of these, could in concept, be added of course, but that isn't the point of FJ.
+Since FJ does not address unboxed types, you won't find equivalents of the various `DoubleXXX`, `IntXXX`, or `LongXXX` functions in FJ. Nor will you find boolean-valued functional interfaces like `Predicate` or `XXXPredicate` in FJ. All of these, could in concept, be added of course, but that isn't the point of FJ.
 
 Also, whereas `java.util.function` parameterizes interfaces on the return value last, FJ parameterizes on the return value first.
  
