@@ -6,9 +6,9 @@ import java.util.Objects;
  * Works only for value types A, B e.g. Integer, String, Double
  */
 class Pair<A,B> {
-    public final A a;
-    public final B b;
-    public Pair(final A a, final B b) { this.a = a; this.b = b;}
+    private final A a;
+    private final B b;
+    Pair(final A a, final B b) { this.a = a; this.b = b;}
 
     @Override
     public boolean equals(final Object o) {

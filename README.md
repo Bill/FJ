@@ -31,20 +31,20 @@ From `CoreTest`:
 Compose two functions:
 
 ```java
-final F1<Double, Integer> f = compose((x)->{return x + 1.0;}, (x)->{return x * 2;});
+final F1<Double, Integer> f = compose(x->x + 1.0, x->x * 2);
 assertThat(f.apply(3), is(7.0));
 ```
 
 Partial application:
 
 ```java
-final F1<Integer,Integer> f = partial( (x, y)->{return x + y;}, 2);
+final F1<Integer,Integer> f = partial( (x, y)->x + y, 2);
 assertThat(f.apply(3), is(5));
 ```
 
 Even more partial application:
 ```java
-final F0<Integer> f = partial( (x, y)->{return x + y;}, 3, 2);
+final F0<Integer> f = partial( (x, y)->x + y, 3, 2);
 assertThat(f.apply(), is(5));
 ```
 

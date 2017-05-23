@@ -19,7 +19,7 @@ public class F00Test {
 
     @Test
     public void composeTest() {
-        final F00<Integer> f = F00.compose((x)->{return x + 1;}, (x)->{return x * 2;});
+        final F00<Integer> f = F00.compose(x->x + 1, x->x * 2);
         assertThat(f.apply(3), is(7));
     }
 

@@ -34,7 +34,7 @@ public class LambdaTest {
          * see the 2012 discussion on lambda-dev: http://mail.openjdk.java.net/pipermail/lambda-dev/2012-February/004518.html
          */
         assertThat(callWith4(FC1::Scooby), is(6));
-        assertThat(callWith4((x) -> x + 3), is(7));
+        assertThat(callWith4(x -> x + 3), is(7));
     }
 
     @FunctionalInterface

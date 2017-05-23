@@ -15,7 +15,7 @@ public interface Core {
         return () -> f.apply( g.apply() );
     }
     static <A,B,C> F1<A,C> compose(final F1<A,B> f, final F1<B,C> g) {
-        return (C x) -> f.apply( g.apply(x) );
+        return x -> f.apply( g.apply(x) );
     }
     static <A,B,C,D> F2<A,C,D> compose(final F1<A,B> f, final F2<B,C,D> g) {
         return (C x, D y) -> f.apply( g.apply(x,y) );
@@ -46,6 +46,6 @@ public interface Core {
         return () -> f.apply(x,y);
     }
     static <A,B,C> F1<A,B> partial( final F2<A,B,C> f, final C y) {
-        return (B x) -> f.apply(x,y);
+        return x -> f.apply(x,y);
     }
 }
