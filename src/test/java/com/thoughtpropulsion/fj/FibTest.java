@@ -10,8 +10,8 @@ import org.junit.Test;
 
 public class FibTest {
 
-    static F1<Integer,Integer> m_fib = memoize(FibTest::fib);
-    static int fib(int n) {
+    static final F1<Integer,Integer> m_fib = memoize(FibTest::fib);
+    static int fib(final int n) {
         switch(n) {
             case 0: case 1: return n;
             default:        return m_fib.apply(n-1) + m_fib.apply(n-2);

@@ -8,15 +8,15 @@ public class LambdaTest {
 
     @FunctionalInterface
     interface FI1 {
-        int scooby(int x);
+        int scooby(final int x);
     }
 
     static class FC1 implements FI1 {
-        public int scooby(int x) { return x + 1;}
-        public static int Scooby(int x) { return x + 2;}
+        public int scooby(final int x) { return x + 1;}
+        public static int Scooby(final int x) { return x + 2;}
     }
 
-    static int callWith4(FI1 f) { return f.scooby(4);}
+    static int callWith4(final FI1 f) { return f.scooby(4);}
 
     @Test
     public void objectMethodRefLambdaEquivalenceTest() {
@@ -39,11 +39,11 @@ public class LambdaTest {
 
     @FunctionalInterface
     interface FI2 {
-        int shaggy(int x);
+        int shaggy(final int x);
     }
 
     static class FC2 implements FI2 {
-        public int shaggy(int x) { return x + 3;}
+        public int shaggy(final int x) { return x + 3;}
     }
 
     @Test

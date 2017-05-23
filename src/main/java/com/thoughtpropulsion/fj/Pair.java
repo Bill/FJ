@@ -6,13 +6,13 @@ import java.util.Objects;
  * Works only for value types A, B e.g. Integer, String, Double
  */
 class Pair<A,B> {
-    public A a;
-    public B b;
-    public Pair(A a, B b) { this.a = a; this.b = b;}
+    public final A a;
+    public final B b;
+    public Pair(final A a, final B b) { this.a = a; this.b = b;}
 
     @Override
-    public boolean equals(Object o) {
-        Pair other = (Pair<A,B>)o;
+    public boolean equals(final Object o) {
+        final Pair<A,B> other = (Pair<A,B>)o;
         return this.a.equals(other.a) && this.b.equals(other.b);
     }
     @Override

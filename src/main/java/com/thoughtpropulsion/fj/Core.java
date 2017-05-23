@@ -3,7 +3,7 @@ package com.thoughtpropulsion.fj;
 import java.util.HashMap;
 
 public interface Core {
-    static <A> A             identity(A x) { return x; }
+    static <A> A             identity(final A x) { return x; }
 
     /*
      * See functional interfaces F0,F1,F2 for constantly(). They had
@@ -11,41 +11,41 @@ public interface Core {
      * the method varies only in its return type (not in its argument list)
      */
 
-    static <A,B> F0<A>     compose(F1<A,B> f, F0<B> g) {
+    static <A,B> F0<A>     compose(final F1<A,B> f, final F0<B> g) {
         return () -> f.apply( g.apply() );
     }
-    static <A,B,C> F1<A,C> compose(F1<A,B> f, F1<B,C> g) {
+    static <A,B,C> F1<A,C> compose(final F1<A,B> f, final F1<B,C> g) {
         return (C x) -> f.apply( g.apply(x) );
     }
-    static <A,B,C,D> F2<A,C,D> compose(F1<A,B> f, F2<B,C,D> g) {
+    static <A,B,C,D> F2<A,C,D> compose(final F1<A,B> f, final F2<B,C,D> g) {
         return (C x, D y) -> f.apply( g.apply(x,y) );
     }
 
-    static <A,B>   F1<A,B> memoize(F1<A,B> f) {
-        HashMap<B,A> memory = new HashMap<>();
+    static <A,B>   F1<A,B> memoize(final F1<A,B> f) {
+        final HashMap<B,A> memory = new HashMap<>();
         return (B key) -> {
             if(! memory.containsKey(key))
                 memory.put(key,f.apply(key));
             return memory.get(key);
         };
     }
-    static <A,B,C>   F2<A,B,C> memoize(F2<A,B,C> f) {
-        HashMap<Pair<B,C>,A> memory = new HashMap<>();
+    static <A,B,C>   F2<A,B,C> memoize(final F2<A,B,C> f) {
+        final HashMap<Pair<B,C>,A> memory = new HashMap<>();
         return (B x, C y) -> {
-            Pair key = new Pair(x,y);
+            final Pair<B,C> key = new Pair<>(x,y);
             if(! memory.containsKey(key))
                 memory.put(key,f.apply(x,y));
             return memory.get(key);
         };
     }
 
-    static <A,B>   F0<A>   partial( F1<A,B> f, B x) {
+    static <A,B>   F0<A>   partial( final F1<A,B> f, final B x) {
         return () -> f.apply(x);
     }
-    static <A,B,C> F0<A>   partial( F2<A,B,C> f, B x, C y) {
+    static <A,B,C> F0<A>   partial( final F2<A,B,C> f, final B x, final C y) {
         return () -> f.apply(x,y);
     }
-    static <A,B,C> F1<A,B> partial( F2<A,B,C> f, C y) {
+    static <A,B,C> F1<A,B> partial( final F2<A,B,C> f, final C y) {
         return (B x) -> f.apply(x,y);
     }
 }

@@ -97,7 +97,7 @@ This approach has yielded some interesting results in FJ so far:
 * cohesive implementation of each concept
 * functional invocation syntax of `Core` "functions" via static import
 
-This table summarizes the the concision (of use) and cohesiveness (of implementation) of the FJ appraoch versus `java.util.function`:
+This table summarizes the concision (of use) and cohesiveness (of implementation) of the FJ appraoch versus `java.util.function`:
 
 | concept               | Java 8 `java.util.function`            | FJ                                 |
 | ----------------------|----------------------------------------|------------------------------------|

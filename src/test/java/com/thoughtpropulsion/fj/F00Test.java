@@ -19,13 +19,13 @@ public class F00Test {
 
     @Test
     public void composeTest() {
-        F00<Integer> f = F00.compose((x)->{return x + 1;}, (x)->{return x * 2;});
+        final F00<Integer> f = F00.compose((x)->{return x + 1;}, (x)->{return x * 2;});
         assertThat(f.apply(3), is(7));
     }
 
     @Test
     public void composeIdentityConstantlyTest() {
-        F00<Integer> f = F00.compose(F00::identity, F00.constantly(5));
+        final F00<Integer> f = F00.compose(F00::identity, F00.constantly(5));
         assertThat( f.apply(3), is(5));
     }
 }

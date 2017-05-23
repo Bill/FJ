@@ -19,7 +19,7 @@ public class ClosedTest {
          * Kinda sad we have to qualify identity here but that's the Java syntax for a method ref
          * we needn't qualify compose because it is not a method ref: we are invoking the method
          */
-        F1<Integer, Integer> f = compose(Core::identity, F1.constantly(5));
+        final F1<Integer, Integer> f = compose(Core::identity, F1.constantly(5));
         assertThat( f.apply(3), is(5));
     }
 
@@ -41,8 +41,8 @@ public class ClosedTest {
          * I don't know any Java syntax that'll let me tell the compiler the type of the intermediate expression
          * short of just breaking it into two separate expressions like this:
          */
-        F2<F1<Integer,Integer>,F2<Integer,Integer,Integer>,Integer> g = compose(Core::memoize,Core::partial);
-        F1<Integer,Integer> h = g.apply((x,y)->{++counter; return x*y;}, 4);
+        final F2<F1<Integer,Integer>,F2<Integer,Integer,Integer>,Integer> g = compose(Core::memoize,Core::partial);
+        final F1<Integer,Integer> h = g.apply((x,y)->{++counter; return x*y;}, 4);
         assertThat(h.apply(3), is(12));
         assertThat(h.apply(3), is(12));
         assertThat(h.apply(4), is(16));
