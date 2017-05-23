@@ -1,4 +1,4 @@
-# FJ—Functional Java—the obligatory tiny functional programming library for Java.
+# FJ—Functional Java—the obligatory tiny functional programming library for Java
 
 Defines functional interfaces for 0-ary, 1-ary and 2-ary functions: `F0`, `F1`, `F2`.
 
