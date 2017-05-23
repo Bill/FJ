@@ -31,20 +31,20 @@ From `CoreTest`:
 Compose two functions:
 
 ```java
-F1<Double, Integer> f = compose((x)->{return x + 1.0;}, (x)->{return x * 2;});
+final F1<Double, Integer> f = compose((x)->{return x + 1.0;}, (x)->{return x * 2;});
 assertThat(f.apply(3), is(7.0));
 ```
 
 Partial application:
 
 ```java
-F1<Integer,Integer> f = partial( (x, y)->{return x + y;}, 2);
+final F1<Integer,Integer> f = partial( (x, y)->{return x + y;}, 2);
 assertThat(f.apply(3), is(5));
 ```
 
 Even more partial application:
 ```java
-F0<Integer> f = partial( (x, y)->{return x + y;}, 3, 2);
+final F0<Integer> f = partial( (x, y)->{return x + y;}, 3, 2);
 assertThat(f.apply(), is(5));
 ```
 
@@ -53,8 +53,8 @@ And the obiligatory (recursive) fibonacci function with memoization optimization
 ```java
 public class FibTest {
 
-    static F1<Integer,Integer> m_fib = memoize(FibTest::fib);
-    static int fib(int n) {
+    static final F1<Integer,Integer> m_fib = memoize(FibTest::fib);
+    static int fib(final int n) {
         switch(n) {
             case 0: case 1: return n;
             default:        return m_fib.apply(n-1) + m_fib.apply(n-2);
@@ -179,7 +179,7 @@ In Lisps, these two kinds of use are unified syntactically:
 Java type erasure means you can't cast expressions to parameterized types. That, coupled with Java's limited type inference means that this statement:
 
 ```java
-F1<Integer,Integer> h = compose(Core::memoize,Core::partial).apply((x,y)->{++counter; return x*y;}, 4);
+final F1<Integer,Integer> h = compose(Core::memoize,Core::partial).apply((x,y)->{++counter; return x*y;}, 4);
 ```
 
 Results in this compile error:
@@ -192,8 +192,8 @@ Error:(25, 40) java: incompatible types: cannot infer type-variable(s) A,B
 Since there was no way to cast the result of `compose()`, the statement had to be split in two:
 
 ```java
-F2<F1<Integer,Integer>,F2<Integer,Integer,Integer>,Integer> g = compose(Core::memoize,Core::partial);
-F1<Integer,Integer> h = g.apply((x,y)->{++counter; return x*y;}, 4);
+final F2<F1<Integer,Integer>,F2<Integer,Integer,Integer>,Integer> g = compose(Core::memoize,Core::partial);
+final F1<Integer,Integer> h = g.apply((x,y)->{++counter; return x*y;}, 4);
 ```
 
 
