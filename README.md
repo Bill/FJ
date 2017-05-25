@@ -104,7 +104,7 @@ This table summarizes the concision (of use) and cohesiveness (of implementation
 | identity              | `identity` methods in 5 interfaces     | 1 `identity` method  in `Core`     |
 | functional composition| `compose` and `andThen` methods...     | 3 `compose`  methods in `Core`     |
 |                       | ...in 4 and 10 interfaces respectively |                                    |
-| memoization           | no                                     | 2 `memoize`  methods in `Core`     |
+| memoization           | no                                     | 3 `memoize`  methods in `Core`     |
 | partial application   | no                                     | 3 `partial`  methods in `Core`     |
 | `constantly` function | no                                     | `constantly` methods...            |
 |                       |                                        | ...in 3 interfaces: `F0`,`F1`,`F2` |
