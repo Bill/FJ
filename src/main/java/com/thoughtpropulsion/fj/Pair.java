@@ -13,7 +13,7 @@ class Pair<A,B> {
     @Override
     public boolean equals(final Object o) {
         final Pair<A,B> other = (Pair<A,B>)o;
-        return this.a.equals(other.a) && this.b.equals(other.b);
+        return Objects.equals(this.a,other.a) && Objects.equals(this.b,other.b);
     }
     @Override
     public int hashCode() {

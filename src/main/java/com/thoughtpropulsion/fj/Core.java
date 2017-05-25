@@ -21,14 +21,6 @@ public interface Core {
         return (C x, D y) -> f.apply( g.apply(x,y) );
     }
 
-    static <A,B>   F1<A,B> memoize(final F1<A,B> f) {
-        final HashMap<B,A> memory = new HashMap<>();
-        return (B key) -> {
-            if(! memory.containsKey(key))
-                memory.put(key,f.apply(key));
-            return memory.get(key);
-        };
-    }
     static <A,B,C>   F2<A,B,C> memoize(final F2<A,B,C> f) {
         final HashMap<Pair<B,C>,A> memory = new HashMap<>();
         return (B x, C y) -> {
@@ -37,6 +29,20 @@ public interface Core {
                 memory.put(key,f.apply(x,y));
             return memory.get(key);
         };
+    }
+
+    // define one-arg memoization i.t.o. two-arg memoization
+    static <A,B>   F1<A,B> memoize(final F1<A,B> f) {
+        final F2<A,B,Object> wrap = (x2, _dont_care) -> f.apply(x2),
+                m = memoize(wrap);
+        return (B x) -> m.apply(x, null);
+    }
+
+    // define zero-arg memoization i.t.o. one-arg memoization
+    static <A> F0<A> memoize(final F0<A> f) {
+        final F1<A,Object> wrap = (_dont_care) -> f.apply(),
+                m = memoize(wrap);
+        return () -> m.apply(null);
     }
 
     static <A,B>   F0<A>   partial( final F1<A,B> f, final B x) {

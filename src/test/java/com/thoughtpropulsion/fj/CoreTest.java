@@ -54,6 +54,15 @@ public class CoreTest {
     int counter=0;
 
     @Test
+    public void memoizeF0Test() {
+        counter = 0;
+        final F0<Integer> f = memoize(()->++counter);
+        assertThat(f.apply(),is(1));
+        assertThat(f.apply(),is(1));
+        assertThat(counter,is(1));
+    }
+
+    @Test
     public void memoizeF1Test() {
         counter = 0;
         final F1<Integer,Integer> f = memoize(x->{++counter; return x;});
