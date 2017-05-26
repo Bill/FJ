@@ -196,7 +196,6 @@ final F2<F1<Integer,Integer>,F2<Integer,Integer,Integer>,Integer> g = compose(Co
 final F1<Integer,Integer> h = g.apply((x,y)->{++counter; return x*y;}, 4);
 ```
 
-
 ## Extras
 
 The `LambdaTest` captures some assumptions about how lambdas, functional interfaces, and method references, work.
